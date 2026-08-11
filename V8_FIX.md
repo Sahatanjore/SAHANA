@@ -1,4 +1,4 @@
-SAHANA v8 build fix
+AINA v8 build fix
 
 The uploaded GitHub Actions log still contains both:
 - app/src/main/res/drawable/ic_sahana_logo.png

@@ -1,4 +1,4 @@
-# SAHANA
+# AINA
 
 Premium personal finance app foundation.
 

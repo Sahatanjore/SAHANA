@@ -1,4 +1,4 @@
-SAHANA v9 permanent logo fix
+AINA v9 permanent logo fix
 
 The latest GitHub run still used both ic_sahana_logo.png and ic_sahana_logo.xml,
 so the build failed at mergeReleaseResources.

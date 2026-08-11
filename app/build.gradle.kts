@@ -7,14 +7,14 @@ plugins {
 
 // Remove stale logo files left behind by older repository uploads.
 // This runs before Android resource merging, so old ic_sahana_logo.xml
-// cannot collide with the current SAHANA launcher PNG.
+// cannot collide with the current AINA launcher PNG.
 val cleanupSahanaLegacyLogo by tasks.registering {
     doLast {
         val resRoot = file("src/main/res")
         resRoot.walkTopDown()
             .filter { it.isFile && (it.name == "ic_sahana_logo.xml" || it.name == "ic_sahana_logo.svg" || it.name == "ic_sahana_logo.png") }
             .forEach {
-                println("Removing stale SAHANA logo: ${it.relativeTo(projectDir)}")
+                println("Removing stale AINA logo: ${it.relativeTo(projectDir)}")
                 it.delete()
             }
     }
@@ -32,8 +32,8 @@ android {
         applicationId = "com.sahana.expense"
         minSdk = 24
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 11
+        versionName = "1.1.0"
     }
 
     compileOptions {

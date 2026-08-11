@@ -1,6 +1,6 @@
-# SAHANA Premium roadmap
+# AINA Premium roadmap
 
-The production roadmap requested for SAHANA:
+The production roadmap requested for AINA:
 1. Secure AI integration with web/current-information access.
 2. Smart text + voice expense entry.
 3. Camera + gallery receipt capture and OCR.
@@ -17,4 +17,4 @@ The production roadmap requested for SAHANA:
 14. Genuine 60MB+ product size through real assets/features, never filler files.
 
 Copyright rule:
-Do not copy third-party proprietary artwork, code, logos, characters or exact UI. Use public product inspiration only and create original SAHANA assets.
+Do not copy third-party proprietary artwork, code, logos, characters or exact UI. Use public product inspiration only and create original AINA assets.

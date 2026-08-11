@@ -1,4 +1,4 @@
-SAHANA v5 test build
+AINA v5 test build
 
 The previous release APK was built without an explicit release signing config.
 Android can report "App not installed / package appears invalid" for an
