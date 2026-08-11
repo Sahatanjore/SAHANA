@@ -514,7 +514,7 @@ private fun HomeScreen(entries: List<MoneyEntry>, language: AppLanguage, onIncom
         verticalArrangement = Arrangement.spacedBy(10.dp),
         contentPadding = PaddingValues(top = 4.dp, bottom = 110.dp)
     ) {
-        item { BalanceHero(balance, income, expense) }
+        item { BalanceHero(balance, income, expense, language) }
         item { SahaHomeCard(language, onSaha) }
 
         if (savingsTarget > 0 || investmentTarget > 0) {
@@ -678,7 +678,7 @@ private fun GoalProgressRow(
 }
 
 @Composable
-private fun BalanceHero(balance: Double, income: Double, expense: Double) {
+private fun BalanceHero(balance: Double, income: Double, expense: Double, language: AppLanguage) {
     val transition = rememberInfiniteTransition(label = "balanceWave")
     val phase by transition.animateFloat(
         initialValue = 0f,
@@ -708,18 +708,18 @@ private fun BalanceHero(balance: Double, income: Double, expense: Double) {
         Column(Modifier.padding(24.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Surface(shape = RoundedCornerShape(10.dp), color = Color.White.copy(alpha = .10f)) {
-                    Text(tr(uiLanguage, "TOTAL BALANCE", "மொத்த இருப்பு"), modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp), color = Color.White.copy(.80f), fontSize = 11.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.2.sp)
+                    Text(tr(language, "TOTAL BALANCE", "மொத்த இருப்பு"), modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp), color = Color.White.copy(.80f), fontSize = 11.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.2.sp)
                 }
                 Spacer(Modifier.weight(1f))
                 Text("AI", color = Gold, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp, letterSpacing = 1.2.sp)
             }
             Spacer(Modifier.height(12.dp))
             Text(money(balance), color = Color.White, fontSize = 34.sp, fontWeight = FontWeight.ExtraBold)
-            Text(if (balance >= 0) tr(uiLanguage, "You're on track this period", "இந்த காலத்தில் நீங்கள் சரியான பாதையில் இருக்கிறீர்கள்") else tr(uiLanguage, "Review your spending", "உங்கள் செலவுகளை சரிபார்க்கவும்"), color = Color.White.copy(.72f), style = MaterialTheme.typography.bodySmall)
+            Text(if (balance >= 0) tr(language, "You're on track this period", "இந்த காலத்தில் நீங்கள் சரியான பாதையில் இருக்கிறீர்கள்") else tr(language, "Review your spending", "உங்கள் செலவுகளை சரிபார்க்கவும்"), color = Color.White.copy(.72f), style = MaterialTheme.typography.bodySmall)
             Spacer(Modifier.height(22.dp))
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                HeroMetric(tr(uiLanguage, "Income", "வரவு"), income, Mint, Modifier.weight(1f))
-                HeroMetric(tr(uiLanguage, "Expenses", "செலவுகள்"), expense, Coral, Modifier.weight(1f))
+                HeroMetric(tr(language, "Income", "வரவு"), income, Mint, Modifier.weight(1f))
+                HeroMetric(tr(language, "Expenses", "செலவுகள்"), expense, Coral, Modifier.weight(1f))
             }
         }
     }
