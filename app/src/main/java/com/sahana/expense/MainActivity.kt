@@ -106,7 +106,7 @@ private val Coral = Color(0xFFFF6B7A)
 private val CanvasBg = Color(0xFFF6F7FB)
 
 @Composable
-fun VeeraTheme(dark: Boolean = false, content: @Composable () -> Unit) {
+fun SahanaTheme(dark: Boolean = false, content: @Composable () -> Unit) {
     MaterialTheme(
         colorScheme = if (dark) darkColorScheme(
             primary = Color(0xFF9A8CFF),
@@ -141,7 +141,7 @@ class MainActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { VeeraApp() }
+        setContent { SahanaApp() }
     }
 
     override fun onResume() {
@@ -166,7 +166,7 @@ class MainActivity : FragmentActivity() {
             }
         })
         val info = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Unlock Veera")
+            .setTitle("Unlock Sahana")
             .setSubtitle("Protect your financial information")
             .setAllowedAuthenticators(authenticators)
             .build()
@@ -176,7 +176,7 @@ class MainActivity : FragmentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun VeeraApp() {
+private fun SahanaApp() {
     var tab by remember { mutableIntStateOf(0) }
     var darkTheme by remember { mutableStateOf(false) }
     var showExplore by remember { mutableStateOf(false) }
@@ -192,7 +192,7 @@ private fun VeeraApp() {
     var editingEntry by remember { mutableStateOf<MoneyEntry?>(null) }
     var showDeleteConfirm by remember { mutableStateOf<MoneyEntry?>(null) }
 
-    VeeraTheme(dark = darkTheme) {
+    SahanaTheme(dark = darkTheme) {
     Scaffold(
         containerColor = if (darkTheme) Midnight else CanvasBg,
         topBar = {
@@ -200,10 +200,10 @@ private fun VeeraApp() {
                 modifier = Modifier.fillMaxWidth().background(CanvasBg).statusBarsPadding().padding(horizontal = 20.dp, vertical = 12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                VeeraLogo(modifier = Modifier.size(44.dp))
+                SahanaLogo(modifier = Modifier.size(44.dp))
                 Spacer(Modifier.width(12.dp))
                 Column(Modifier.weight(1f)) {
-                    Text("VEERA", fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 2.sp, color = Ink)
+                    Text("SAHANA", fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 2.sp, color = Ink)
                     Text("Your money, elevated.", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 Surface(shape = CircleShape, color = Color.White, shadowElevation = 2.dp) {
@@ -268,7 +268,7 @@ private fun VeeraApp() {
         AlertDialog(
             onDismissRequest = { showDeleteConfirm = null },
             title = { Text("Delete transaction?", fontWeight = FontWeight.ExtraBold) },
-            text = { Text("This transaction will be removed from Veera. This action cannot be undone.") },
+            text = { Text("This transaction will be removed from Sahana. This action cannot be undone.") },
             confirmButton = {
                 TextButton(onClick = {
                     val target = showDeleteConfirm
@@ -309,7 +309,7 @@ private fun VeeraApp() {
 }
 
 @Composable
-private fun VeeraLogo(modifier: Modifier = Modifier) {
+private fun SahanaLogo(modifier: Modifier = Modifier) {
     Box(modifier.clip(RoundedCornerShape(14.dp)).background(Brush.linearGradient(listOf(Violet, VioletDeep))), contentAlignment = Alignment.Center) {
         Icon(Icons.Default.AccountBalanceWallet, null, tint = Color.White, modifier = Modifier.size(25.dp))
         Box(Modifier.size(7.dp).align(Alignment.TopEnd).offset((-6).dp, 6.dp).clip(CircleShape).background(Gold))
@@ -625,10 +625,10 @@ private fun MoreScreen(onExplore: () -> Unit) {
         Card(shape = RoundedCornerShape(28.dp), colors = CardDefaults.cardColors(containerColor = Midnight)) {
             Column(Modifier.padding(22.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    VeeraLogo(Modifier.size(46.dp))
+                    SahanaLogo(Modifier.size(46.dp))
                     Spacer(Modifier.width(12.dp))
                     Column(Modifier.weight(1f)) {
-                        Text("VEERA PREMIUM", color = Gold, fontSize = 12.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.5.sp)
+                        Text("SAHANA PREMIUM", color = Gold, fontSize = 12.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.5.sp)
                         Text("Clarity. Control. Confidence.", color = Color.White, fontSize = 18.sp, fontWeight = FontWeight.Bold)
                     }
                 }
@@ -1154,7 +1154,7 @@ private fun writePdf(context: Context, uri: Uri, entries: List<MoneyEntry>) {
         val page = doc.startPage(pageInfo)
         val canvas = page.canvas
         val paint = android.graphics.Paint().apply { color = android.graphics.Color.rgb(22, 26, 43); textSize = 22f; isFakeBoldText = true }
-        canvas.drawText("VEERA • Financial Report", 36f, 50f, paint)
+        canvas.drawText("SAHANA • Financial Report", 36f, 50f, paint)
         paint.textSize = 11f; paint.isFakeBoldText = false
         canvas.drawText("Generated ${formatDateTime(System.currentTimeMillis())}", 36f, 70f, paint)
         var y = 102f
