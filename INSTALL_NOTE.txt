@@ -1,0 +1,11 @@
+SAHANA v5 test build
+
+The previous release APK was built without an explicit release signing config.
+Android can report "App not installed / package appears invalid" for an
+unsigned APK.
+
+This version signs the release build with the GitHub runner's standard debug
+keystore ONLY for direct testing. It is installable for testing.
+
+For a Play Store/production release, we will create and securely store a
+private release keystore and never commit it to GitHub.

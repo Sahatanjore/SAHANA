@@ -25,6 +25,19 @@ android {
         jvmTarget = "17"
     }
 
+    // TEST RELEASE: sign the APK so it can be installed directly.
+    // Replace with a private release keystore before Play Store publishing.
+    signingConfigs {
+        getByName("debug")
+    }
+
+    buildTypes {
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("debug")
+            isMinifyEnabled = false
+        }
+    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
