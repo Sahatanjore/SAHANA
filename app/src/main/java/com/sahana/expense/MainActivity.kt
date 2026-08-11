@@ -570,8 +570,8 @@ private fun SahaHomeCard(language: AppLanguage, onClick: () -> Unit) {
             Spacer(Modifier.width(13.dp))
             Column(Modifier.weight(1f)) {
                 Text("AI", color = Gold, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.5.sp)
-                Text(tr(uiLanguage, "Your private money assistant", "உங்கள் தனிப்பட்ட பண உதவியாளர்"), color = Color.White, fontWeight = FontWeight.Bold)
-                Text(tr(uiLanguage, "Insights • Goals • Spending", "பகுப்பாய்வு • இலக்குகள் • செலவுகள்"), color = Color.White.copy(.62f), style = MaterialTheme.typography.bodySmall)
+                Text(tr(language, "Your private money assistant", "உங்கள் தனிப்பட்ட பண உதவியாளர்"), color = Color.White, fontWeight = FontWeight.Bold)
+                Text(tr(language, "Insights • Goals • Spending", "பகுப்பாய்வு • இலக்குகள் • செலவுகள்"), color = Color.White.copy(.62f), style = MaterialTheme.typography.bodySmall)
             }
             Icon(Icons.Default.ChevronRight, null, tint = Color.White.copy(.75f))
         }
