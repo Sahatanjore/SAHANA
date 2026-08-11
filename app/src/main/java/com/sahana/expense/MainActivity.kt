@@ -496,6 +496,7 @@ private fun AINALogo(modifier: Modifier = Modifier) {
 @Composable
 private fun HomeScreen(entries: List<MoneyEntry>, language: AppLanguage, onIncome: () -> Unit, onExpense: () -> Unit, onTransfer: () -> Unit, onEntryClick: (MoneyEntry) -> Unit, onSaha: () -> Unit) {
     val context = LocalContext.current
+    val uiLanguage = loadLanguage(context)
     val income = entries.filter { it.type == EntryType.INCOME }.sumOf { it.amount }
     val expense = entries.filter { it.type == EntryType.EXPENSE }.sumOf { it.amount }
     val balance = income - expense
@@ -529,17 +530,17 @@ private fun HomeScreen(entries: List<MoneyEntry>, language: AppLanguage, onIncom
 
         item {
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
-                QuickAction(tr(language, "Income", "வரவு"), Icons.Default.ArrowDownward, Mint, onIncome, Modifier.weight(1f))
-                QuickAction(tr(language, "Expense", "செலவு"), Icons.Default.ArrowUpward, Coral, onExpense, Modifier.weight(1f))
-                QuickAction(tr(language, "Transfer", "மாற்றம்"), Icons.Default.SwapHoriz, Violet, onTransfer, Modifier.weight(1f))
+                QuickAction(tr(uiLanguage, "Income", "வரவு"), Icons.Default.ArrowDownward, Mint, onIncome, Modifier.weight(1f))
+                QuickAction(tr(uiLanguage, "Expense", "செலவு"), Icons.Default.ArrowUpward, Coral, onExpense, Modifier.weight(1f))
+                QuickAction(tr(uiLanguage, "Transfer", "மாற்றம்"), Icons.Default.SwapHoriz, Violet, onTransfer, Modifier.weight(1f))
             }
         }
         item { SpendingOverview(income, expense) }
         item {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
-                    Text(tr(language, "Recent activity", "சமீபத்திய பரிவர்த்தனைகள்"), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.ExtraBold)
-                    Text(tr(language, "Grouped by transaction date", "தேதி வாரியாக"), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(tr(uiLanguage, "Recent activity", "சமீபத்திய பரிவர்த்தனைகள்"), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.ExtraBold)
+                    Text(tr(uiLanguage, "Grouped by transaction date", "தேதி வாரியாக"), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
         }
@@ -569,8 +570,8 @@ private fun SahaHomeCard(language: AppLanguage, onClick: () -> Unit) {
             Spacer(Modifier.width(13.dp))
             Column(Modifier.weight(1f)) {
                 Text("AI", color = Gold, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.5.sp)
-                Text(tr(language, "Your private money assistant", "உங்கள் தனிப்பட்ட பண உதவியாளர்"), color = Color.White, fontWeight = FontWeight.Bold)
-                Text(tr(language, "Insights • Goals • Spending", "பகுப்பாய்வு • இலக்குகள் • செலவுகள்"), color = Color.White.copy(.62f), style = MaterialTheme.typography.bodySmall)
+                Text(tr(uiLanguage, "Your private money assistant", "உங்கள் தனிப்பட்ட பண உதவியாளர்"), color = Color.White, fontWeight = FontWeight.Bold)
+                Text(tr(uiLanguage, "Insights • Goals • Spending", "பகுப்பாய்வு • இலக்குகள் • செலவுகள்"), color = Color.White.copy(.62f), style = MaterialTheme.typography.bodySmall)
             }
             Icon(Icons.Default.ChevronRight, null, tint = Color.White.copy(.75f))
         }
@@ -707,18 +708,18 @@ private fun BalanceHero(balance: Double, income: Double, expense: Double) {
         Column(Modifier.padding(24.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Surface(shape = RoundedCornerShape(10.dp), color = Color.White.copy(alpha = .10f)) {
-                    Text(tr(language, "TOTAL BALANCE", "மொத்த இருப்பு"), modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp), color = Color.White.copy(.80f), fontSize = 11.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.2.sp)
+                    Text(tr(uiLanguage, "TOTAL BALANCE", "மொத்த இருப்பு"), modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp), color = Color.White.copy(.80f), fontSize = 11.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.2.sp)
                 }
                 Spacer(Modifier.weight(1f))
                 Text("AI", color = Gold, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp, letterSpacing = 1.2.sp)
             }
             Spacer(Modifier.height(12.dp))
             Text(money(balance), color = Color.White, fontSize = 34.sp, fontWeight = FontWeight.ExtraBold)
-            Text(if (balance >= 0) tr(language, "You're on track this period", "இந்த காலத்தில் நீங்கள் சரியான பாதையில் இருக்கிறீர்கள்") else tr(language, "Review your spending", "உங்கள் செலவுகளை சரிபார்க்கவும்"), color = Color.White.copy(.72f), style = MaterialTheme.typography.bodySmall)
+            Text(if (balance >= 0) tr(uiLanguage, "You're on track this period", "இந்த காலத்தில் நீங்கள் சரியான பாதையில் இருக்கிறீர்கள்") else tr(uiLanguage, "Review your spending", "உங்கள் செலவுகளை சரிபார்க்கவும்"), color = Color.White.copy(.72f), style = MaterialTheme.typography.bodySmall)
             Spacer(Modifier.height(22.dp))
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                HeroMetric(tr(language, "Income", "வரவு"), income, Mint, Modifier.weight(1f))
-                HeroMetric(tr(language, "Expenses", "செலவுகள்"), expense, Coral, Modifier.weight(1f))
+                HeroMetric(tr(uiLanguage, "Income", "வரவு"), income, Mint, Modifier.weight(1f))
+                HeroMetric(tr(uiLanguage, "Expenses", "செலவுகள்"), expense, Coral, Modifier.weight(1f))
             }
         }
     }
@@ -1067,7 +1068,7 @@ private fun ExploreDialog(
                         FilterChip(selected = language == AppLanguage.TAMIL, onClick = { onLanguageChange(AppLanguage.TAMIL) }, label = { Text("தமிழ்") }, modifier = Modifier.weight(1f))
                     }
                     PremiumInfoCard("Graphics", "High graphics are enabled by default. Balance wave animation follows your selected theme.")
-                    OutlinedButton(onClick = { backupPicker.launch("veera-backup.json") }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp)) { Text("Backup data") }
+                    OutlinedButton(onClick = { backupPicker.launch("sahana-backup.json") }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp)) { Text("Backup data") }
                     OutlinedButton(onClick = { restoreLauncher.launch(arrayOf("application/json", "text/plain")) }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp)) { Text("Restore data") }
                 }
                 if (active == "App Lock") {
@@ -1580,7 +1581,7 @@ private fun saveTheme(context: Context, index: Int) {
     context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).edit().putInt("theme_index", index).apply()
 }
 
-private const val PREFS_NAME = "veera_storage"
+private const val PREFS_NAME = "sahana_storage"
 private const val ENTRIES_KEY = "entries_json"
 
 private fun saveEntries(context: Context, entries: List<MoneyEntry>) {
@@ -1705,7 +1706,7 @@ private fun saveInvestmentTarget(context: Context, amount: Double) { context.get
 private fun loadInvestmentSaved(context: Context): Double = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).getString("investment_saved", "0")?.toDoubleOrNull() ?: 0.0
 private fun saveInvestmentSaved(context: Context, amount: Double) { context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).edit().putString("investment_saved", amount.toString()).apply() }
 
-private const val GOAL_CHANNEL = "veera_goal"
+private const val GOAL_CHANNEL = "sahana_goal"
 private const val GOAL_REQUEST = 7744
 private const val INVESTMENT_REQUEST = 7745
 
@@ -1749,10 +1750,10 @@ class GoalReminderReceiver : BroadcastReceiver() {
         val investment = intent?.getBooleanExtra("investment", false) ?: false
         if (goal <= 0) return
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        if (Build.VERSION.SDK_INT >= 26) manager.createNotificationChannel(NotificationChannel(GOAL_CHANNEL, "AINA Savings Goals", NotificationManager.IMPORTANCE_DEFAULT))
+        if (Build.VERSION.SDK_INT >= 26) manager.createNotificationChannel(NotificationChannel(GOAL_CHANNEL, "SAHANA Savings Goals", NotificationManager.IMPORTANCE_DEFAULT))
         val notification = Notification.Builder(context, GOAL_CHANNEL)
-            .setSmallIcon(com.veera.expense.R.drawable.ic_veera_logo)
-            .setContentTitle(if (investment) "AINA • Investment goal" else "AINA • Savings goal")
+            .setSmallIcon(com.sahana.expense.R.drawable.sahana_launcher_logo)
+            .setContentTitle(if (investment) "SAHANA • Investment goal" else "SAHANA • Savings goal")
             .setContentText(if (investment) "Investment target ₹${String.format(Locale.getDefault(), "%,.0f", goal)}. Update your invested amount separately from your cash balance." else "Savings target ₹${String.format(Locale.getDefault(), "%,.0f", goal)}. Update your saved amount separately from your cash balance.")
             .setAutoCancel(true)
             .build()
@@ -1873,7 +1874,7 @@ class QuickAddOverlayService : Service() {
             return
         }
         createChannel()
-        val notification = Notification.Builder(this, "veera_quick_add")
+        val notification = Notification.Builder(this, "sahana_quick_add")
             .setSmallIcon(android.R.drawable.ic_input_add)
             .setContentTitle("AINA Quick Add")
             .setContentText("Quickly add an expense or income")
@@ -1888,7 +1889,7 @@ class QuickAddOverlayService : Service() {
     private fun createChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                "veera_quick_add",
+                "sahana_quick_add",
                 "AINA Quick Add",
                 NotificationManager.IMPORTANCE_LOW
             )
