@@ -4,6 +4,26 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
+
+// Remove stale logo files left behind by older repository uploads.
+// This runs before Android resource merging, so old ic_sahana_logo.xml
+// cannot collide with the current SAHANA launcher PNG.
+val cleanupSahanaLegacyLogo by tasks.registering {
+    doLast {
+        val resRoot = file("src/main/res")
+        resRoot.walkTopDown()
+            .filter { it.isFile && (it.name == "ic_sahana_logo.xml" || it.name == "ic_sahana_logo.svg" || it.name == "ic_sahana_logo.png") }
+            .forEach {
+                println("Removing stale SAHANA logo: ${it.relativeTo(projectDir)}")
+                it.delete()
+            }
+    }
+}
+
+tasks.named("preBuild").configure {
+    dependsOn(cleanupSahanaLegacyLogo)
+}
+
 android {
     namespace = "com.sahana.expense"
     compileSdk = 35
