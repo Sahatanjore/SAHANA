@@ -813,6 +813,7 @@ private fun EntryDetailDialog(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun EditEntryDialog(
     entry: MoneyEntry,
@@ -870,6 +871,7 @@ private fun EditEntryDialog(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AddEntryDialog(
     type: EntryType,
@@ -1112,7 +1114,7 @@ private const val GOAL_CHANNEL = "veera_goal"
 private const val GOAL_REQUEST = 7744
 
 private fun requestNotificationPermission(context: Context) {
-    if (Build.VERSION.SDK_INT >= 33 && context is ComponentActivity && context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+    if (Build.VERSION.SDK_INT >= 33 && context is FragmentActivity && context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
         context.requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 7745)
     }
 }
@@ -1138,7 +1140,7 @@ class GoalReminderReceiver : BroadcastReceiver() {
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= 26) manager.createNotificationChannel(NotificationChannel(GOAL_CHANNEL, "SAHANA Savings Goals", NotificationManager.IMPORTANCE_DEFAULT))
         val notification = Notification.Builder(context, GOAL_CHANNEL)
-            .setSmallIcon(com.sahana.expense.R.drawable.ic_veera_logo)
+            .setSmallIcon(com.sahana.expense.R.drawable.ic_sahana_notification)
             .setContentTitle("SAHANA • Daily money check")
             .setContentText("Your savings goal is ₹${String.format(Locale.getDefault(), "%,.0f", goal)}. Add today's transactions and keep your goal on track.")
             .setAutoCancel(true)

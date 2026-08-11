@@ -1,8 +1,10 @@
-# SAHANA v2 build fix
+# SAHANA v3 build fixes
 
-The GitHub Actions log showed the Android module was discovered correctly, but Kotlin compilation failed because:
-- androidx.fragment was missing while MainActivity extends FragmentActivity.
-- androidx.biometric was missing while App Lock uses BiometricManager/BiometricPrompt.
-- the notification referenced a missing ic_veera_logo resource.
+Based on the latest GitHub Actions log:
 
-v2 adds the required Fragment and Biometric dependencies and provides a SAHANA notification icon. Remaining Material experimental API messages are warnings, not the build failure.
+- Opted EditEntryDialog and AddEntryDialog into ExperimentalMaterial3Api because ExposedDropdownMenuBox/menuAnchor APIs are experimental in the pinned Material3 version.
+- Replaced unresolved ComponentActivity check with FragmentActivity, matching MainActivity's base class.
+- Replaced missing ic_veera_logo with a valid SAHANA notification icon resource.
+- Removed an accidental duplicate local `toAccount` declaration.
+- Kept the existing AndroidX Fragment and Biometric dependencies.
+- No third-party character/theme artwork was added.
